@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Cool Canvas</title>
+	<meta charset="utf-8" />
+    
+    <style type="text/css">
+        input{
+            margin-left:5px;
+        }
+    </style>
+
+</head>
+<body>
+    <div style="margin:10px" width="50%">
+        <label for="canvaswidth">Canvas Width: </label><input type="number" id="canvasWidth" value="0" />
+        <label for="canvasHeight">Canvas Height:</label><input type="number" id="canvasHeight" value="0" />
+        <label for="canvasBorderColour">Canvas Border Color</label> <input id="canvasColor" type="color" value="#fff" />
+        <input type="button" id="GenerateCanvas" value="Generate Canvas" onclick="CreateCanvas()" />
+    </div>
+
+    <div id="NewlyGeneratedCode" style="margin:10px">
+        <label for="GeneratedCanvasCode">Generated Canvas Code:</label>
+        <input type="text" id="GeneratedCanvasCode" style="height:200px"/>
+    </div>
+
+    <div id="myCanvas" style="width:10px">
+
+    </div>
+
+    <script type="text/javascript">
+        function CreateCanvas() {
+            var cWidth = document.getElementById('canvasWidth').value;
+            var cHeight = document.getElementById('canvasHeight').value;
+            var cColour = document.getElementById('canvasColor').value;
+
+            var Newcanvas = document.createElement('canvas');
+            Newcanvas.width = cWidth;
+            Newcanvas.height = cHeight;
+            Newcanvas.style.borderColor = cColour;
+            Newcanvas.style.borderStyle = 'solid';
+            var currentDiv = document.getElementById('myCanvas');
+            currentDiv.innerHTML = Newcanvas.outerHTML;
+            document.getElementById('GeneratedCanvasCode').value = Newcanvas.outerHTML;
+        }
+
+    </script>
+</body>
+</html>

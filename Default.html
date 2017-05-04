@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>File Input</title>
+	<meta charset="utf-8" />
+    <script type="text/javascript">
+
+    </script>
+</head>
+<body>
+
+    <div>
+        <div id="Contents" style="margin:5px">
+            <input type="file" id="fileID" accept="image/*" onchange="encodeImageFile(this)" />
+            <label for="fileContents">File contents</label>
+            <input type="text" id="fileContents" value="test" style="height:200px"/>
+        </div>
+
+
+        <div id="Imageblock"></div>
+        <canvas id="myCanvas" width="300" height="350" style="border:1px solid #d3d3d3;"></canvas>
+
+         
+
+    </div>
+
+    <script type="text/javascript">
+        function encodeImageFile(element) {
+            var file = element.files[0];
+            var filereader = new FileReader();
+            filereader.onloadend = function () {
+                var newImage = document.createElement('img');
+                newImage.id = 'uploadedImg';
+                newImage.src = filereader.result;
+                document.getElementById("Imageblock").innerHTML = newImage.outerHTML;
+                document.getElementById('fileContents').value = newImage.src;
+                loadImage();
+            }
+            filereader.readAsDataURL(file);
+            
+        }
+
+        function loadImage() {
+            var c = document.getElementById("myCanvas");
+            var ctx = c.getContext("2d");
+            var img = document.getElementById("uploadedImg");
+            ctx.drawImage(img,0,0,350,350);
+        }
+    </script>
+</body>
+</html>
